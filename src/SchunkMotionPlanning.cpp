@@ -17,8 +17,6 @@ SchunkMotionPlanning::SchunkMotionPlanning()
     m_topicSub_JointState = m_nh.subscribe("/joint_states", 1, &SchunkMotionPlanning::topicCallback_JointState, this);
     // Implementation of topics to publish.
     //m_topicPub_JointVel = m_nh.advertise<brics_actuator::JointVelocities>("command_vel", 1);
-
-    cout<<"ggggggg"<<endl;
 }
 
 SchunkMotionPlanning::~SchunkMotionPlanning()
@@ -29,7 +27,6 @@ SchunkMotionPlanning::~SchunkMotionPlanning()
 
 void SchunkMotionPlanning::topicCallback_JointState(const sensor_msgs::JointState& joint_state)
 {
-    cout<<"aaaaaaaa"<<endl;
     m_JointState = joint_state;
 
     //m_RobotState->setVariableValues(joint_state);
@@ -37,7 +34,6 @@ void SchunkMotionPlanning::topicCallback_JointState(const sensor_msgs::JointStat
 
 void SchunkMotionPlanning::topicCallback_CmdVel(const geometry_msgs::Twist& vel)
 {
-    cout<<"hhhhhhhhhhhhhhhhh"<<endl;
     ROS_INFO("Camera velocity in the reference frame:\n");
     cout<<vel<<"\n";
 
@@ -109,7 +105,6 @@ void SchunkMotionPlanning::topicCallback_CmdVel(const geometry_msgs::Twist& vel)
     out_vel.angular.z=outAng(2);
     cout<<"Transformed camera velocity:\n";
     cout<<out_vel<<"\n";
-
 }
 
 void SchunkMotionPlanning::computeJointVel(const sensor_msgs::JointState& joint_state)
@@ -117,16 +112,13 @@ void SchunkMotionPlanning::computeJointVel(const sensor_msgs::JointState& joint_
     //ROS_INFO("vvvv");
     m_RobotState->setVariableValues(joint_state);
     m_JointVel.resize(7);
-    cout<<"sss"<<endl;
     if (m_CmdVel.size() > 0)
         m_RobotState->computeVariableVelocity(m_pJointModelGroup, m_JointVel, m_CmdVel,
                                          m_RobotState->getLinkModel(m_pJointModelGroup->getLinkModelNames().back()));
-    cout<<"yyyy"<<endl;
 }
 
 void SchunkMotionPlanning::publishJointVel()
 {
-    cout<<"mmmmmmm"<<endl;
     const unsigned int uiDOF = 7;
     stringstream ssJointNames;
 
@@ -154,7 +146,6 @@ int main(int argc, char** argv)
     //spinner.start();
     // Create a Schunk Motion Planning node.
     SchunkMotionPlanning m_node;
-    cout<<"hello iat 2"<<endl;
 
     /***************Calculate and publish joint velocity.******************/
     //m_node.m_JointVel.resize(7);
@@ -172,7 +163,6 @@ int main(int argc, char** argv)
         ros::spinOnce();
         r.sleep();
     }
-    cout<<"hello bremen"<<endl;
 
     return 0;
 }
