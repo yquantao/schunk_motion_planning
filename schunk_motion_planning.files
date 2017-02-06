@@ -1,0 +1,4 @@
+/home/quantao/dev/catkin_ws/src/schunk_motion_planning/CMakeLists.txt
+/home/quantao/dev/catkin_ws/src/schunk_motion_planning/package.xml
+include/schunk_motion_planning/SchunkMotionPlanning.h
+src/SchunkMotionPlanning.cpp
