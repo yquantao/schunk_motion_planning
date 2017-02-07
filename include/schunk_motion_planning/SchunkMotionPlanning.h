@@ -27,7 +27,7 @@ public:
     ~SchunkMotionPlanning();
     /// Member function
     void topicCallback_JointState(const sensor_msgs::JointState& joint_state);
-    void topicCallback_CmdVel(const geometry_msgs::Twist& vel);    
+    void topicCallback_CmdVel(const geometry_msgs::Twist& vel);
     void computeJointVel(const sensor_msgs::JointState& joint_state);
 
     void publishJointVel();
@@ -43,7 +43,7 @@ public:
     /// Declaration of topics to publish.
     ros::Publisher m_topicPub_JointVel;
 
-    /// Joint state. 不确定
+    /// Joint state. 
     sensor_msgs::JointState m_JointState;
     /// Joint velocities.
     Eigen::VectorXd m_CmdVel;
