@@ -76,6 +76,7 @@ void SchunkMotionPlanning::topicCallback_CmdVel(const geometry_msgs::Twist& vel)
                  0,           0,       1;
     // Calculate the whole rotation matrix.
     Rot = RotZ * RotY * RotX;
+
     //*********translation vector**********
     double px, py, pz;
     px = 0.0;
@@ -109,7 +110,6 @@ void SchunkMotionPlanning::topicCallback_CmdVel(const geometry_msgs::Twist& vel)
 
 void SchunkMotionPlanning::computeJointVel(const sensor_msgs::JointState& joint_state)
 {
-    //ROS_INFO("vvvv");
     m_RobotState->setVariableValues(joint_state);
     m_JointVel.resize(7);
     if (m_CmdVel.size() > 0)
